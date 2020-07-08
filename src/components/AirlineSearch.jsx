@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import NavbarApp from './NavbarApp.jsx';
 import UserPage from './UserPage.jsx';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 
 const SERVER_URL = 'http://boring-airline.herokuapp.com/flights.json' // update this once deployed
 
@@ -71,7 +74,7 @@ class AirlineSearch extends Component {
   render() {
     return (
       <div>
-        <NavbarApp />
+        <NavbarApp galleryShow={this.state.galleryShow} userShow={this.state.userShow} />
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={this.saveFlight} />
         {this.state.galleryShow ? <Gallery flightdata={this.state.flightdata} origins={this.state.origins} destinations={this.state.destinations} /> : ''}
@@ -115,25 +118,32 @@ class SecretForm extends Component {
 
 
 
-const Gallery = (props) => {
-  console.log(props.flightdata); // we should see secret objects in the console
+class Gallery extends Component {
 
-  return (
+
+  return() {
     <div class="dropdown">
-      <select id="origin" name="origin">
-        {props.origins.map((flight) =>
-          <option value={flight}>{flight}</option>
-        )}
-      </select>
+      <Form onSubmit={this._handleSubmit}>
+        <select id="origin" name="origin">
+          {props.origins.map((flight) =>
+            <option value={flight}>{flight}</option>
+          )}
+        </select>
       >>
       <select name="dest" id="dest">
-        {props.destinations.map((flight) =>
-          <option value={flight}>{flight}</option>
-        )}
-      </select>
+          {props.destinations.map((flight) =>
+            <option value={flight}>{flight}</option>
+          )}
+        </select>
+        <br></br>
+        <Button variant="primary" type="submit">
+          Search
+      </Button>
+
+      </Form>
     </div >
 
-  );
+  };
 };
 
 
