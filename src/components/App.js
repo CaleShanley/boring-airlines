@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AirlineSearch from './AirlineSearch.jsx';
-import NavbarApp from './NavbarApp.jsx';
 
-function App() {
+
+function App () {
+
   return (
     <div className="App">
-      <NavbarApp />
       <AirlineSearch />
     </div>
-  );
+  )
 }
 
 export default App;

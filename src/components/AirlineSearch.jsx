@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
+import NavbarApp from './NavbarApp.jsx';
 
-const SERVER_URL = 'http://boring-airline.herokuapp.com/airplanes.json' // update this once deployed
+const SERVER_URL = 'http://boring-airline.herokuapp.com/flights.json' // update this once deployed
 
 class AirlineSearch extends Component {
   constructor() {
     super();
     this.state = {
-      flightdata: []
+      flightdata: [],
+      galleryShow: true
     };
 
     const fetchFlights = () => {
@@ -31,13 +32,16 @@ class AirlineSearch extends Component {
     });
   }
 
+
+  ///////////////// DISPLAYYYYY //////////////////////////////////////////////////////////////////////////////////////////////////////
+
   render() {
     return (
       <div>
-        <Button variant="primary">Primary</Button>{' '}
+        <NavbarApp />
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
-        <Gallery flightdata={ this.state.flightdata } />
+        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata }/> : ''}
       </div>
     );
   }
@@ -78,7 +82,7 @@ const Gallery = (props) => {
   console.log( props.flightdata ); // we should see secret objects in the console
   return (
     <div>
-      { props.flightdata.map( (s) => <p key={s.id}>{s.content}</p>)}
+      { props.flightdata.map( (s) => <p key={s.id}>{s.fromto}</p>)}
     </div>
   );
 };
