@@ -182,10 +182,14 @@ const Gallery = (props) => {
 const Airplane = (props) => {
   console.log('some bshdaskifaksjdhflk', props.seats);
 
+  let rows = props.seats.rows
+  let columns = props.seats.columns
+
   return (
     <div class="airplane">
+      <td/>
       {props.seats.map((seat) =>
-        <p>{seat.id}</p>
+        <p>{"Airplane "}{seat.name}{" Rows "}{seat.rows}{" Columns "}{seat.columns}</p>
       )}
     </div>
 
