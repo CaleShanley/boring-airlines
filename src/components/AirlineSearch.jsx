@@ -117,12 +117,12 @@ class SecretForm extends Component {
 
 
 
-class Gallery extends Component {
+const Gallery = (props) => {
 
 
-  return () {
+  return (
     <div class="dropdown">
-      <Form onSubmit={this._handleSubmit}>
+      <Form>
       <select id="origin" name="origin">
         {props.origins.map((flight) =>
           <option value={flight}>{flight}</option>
@@ -142,7 +142,7 @@ class Gallery extends Component {
       </Form>
     </div >
     
-    };
+  );
 };
 
 
