@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 const SERVER_URL = 'http://localhost:3000/airplanes.json' // update this once deployed
 
@@ -33,6 +34,7 @@ class AirlineSearch extends Component {
   render() {
     return (
       <div>
+        <Button variant="primary">Primary</Button>{' '}
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
         <Gallery flightdata={ this.state.flightdata } />
