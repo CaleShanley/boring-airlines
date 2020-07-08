@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3000/airlines.json' // update this once deployed
+const SERVER_URL = 'http://localhost:3000/airplanes.json' // update this once deployed
 
 class AirlineSearch extends Component {
   constructor() {
