@@ -11,13 +11,19 @@ class NavbarApp extends Component {
     this.state = {
       content: ''
     }
-    this._handleClick = this._handleClick.bind(this)
+    this._handleFlightClick = this._handleFlightClick.bind(this)
+    this._handleReservationClick = this._handleReservationClick.bind(this)
   }
 
 
-  _handleClick(event) {
+  _handleFlightClick(event) {
     event.preventDefault()
-    console.log('This was clicked')
+    this.props.galleryShow()
+  }
+
+  _handleReservationClick(event) {
+    event.preventDefault()
+    this.props.userShow()
   }
 
   render() {
@@ -25,8 +31,8 @@ class NavbarApp extends Component {
       <div>
         <Navbar bg="dark" variant="dark">
           <Nav className="mr-auto">
-            <Nav.Link href="#home" onClick={this._handleClick} >Search Flights</Nav.Link>
-            <Nav.Link href="#features" onClick={this._handleClick}>My Reservations</Nav.Link>
+            <Nav.Link href="#home" onClick={this._handleFlightClick} >Search Flights</Nav.Link>
+            <Nav.Link href="#features" onClick={this._handleReservationClick}>My Reservations</Nav.Link>
           </Nav>
         </Navbar>
       </div>
