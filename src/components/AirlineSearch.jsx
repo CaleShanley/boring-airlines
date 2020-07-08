@@ -22,6 +22,9 @@ class AirlineSearch extends Component {
         // console.log(results.data);
         this.setState({ flightdata: results.data });
         setTimeout(fetchFlights, 6000); // recursion - calls itself after 6 seconds
+      }).then(() => {
+        this.getOrigins();
+        this.getDestinations();
       });
     };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import AirlineSearch from './AirlineSearch';
+import AirlineSearch from './AirlineSearch.jsx';
 
 function App() {
   return (
