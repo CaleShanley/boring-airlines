@@ -38,24 +38,24 @@ class AirlineSearch extends Component {
     this.getDestinations();
   }
 
-  getOrigins () {
+  getOrigins() {
     let list = [];
     this.state.flightdata.map((flight) => {
-      list.push(flight.fromto.slice(0,3));
+      list.push(flight.fromto.slice(0, 3));
     });
     let unique = [...new Set(list)];
     list = Array.from(unique);
-    this.setState({origins: list});
+    this.setState({ origins: list });
   }
 
-  getDestinations () {
+  getDestinations() {
     let list = [];
     this.state.flightdata.map((flight) => {
-      list.push(flight.fromto.slice(7,10));
+      list.push(flight.fromto.slice(7, 10));
     });
     let unique = [...new Set(list)];
     list = Array.from(unique);
-    this.setState({destinations: list});
+    this.setState({ destinations: list });
   }
 
   saveFlight(content) {
@@ -73,13 +73,14 @@ class AirlineSearch extends Component {
       <div>
         <NavbarApp />
         <h2>Secrets coming soon</h2>
-        <SecretForm onSubmit={ this.saveFlight } />
-        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations}/> : ''}
-        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''} 
+        <SecretForm onSubmit={this.saveFlight} />
+        {this.state.galleryShow ? <Gallery flightdata={this.state.flightdata} origins={this.state.origins} destinations={this.state.destinations} /> : ''}
+        {this.state.userShow ? <UserPage currentUser={this.state.currentUser} /> : ''}
       </div>
     );
   }
 }
+
 
 
 class SecretForm extends Component {
@@ -116,8 +117,6 @@ class SecretForm extends Component {
 
 const Gallery = (props) => {
   console.log(props.flightdata); // we should see secret objects in the console
-
-
 
   return (
     <div class="dropdown">
