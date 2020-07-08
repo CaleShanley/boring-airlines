@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3000/secrets.json' // update this once deployed
+const SERVER_URL = 'http://localhost:3000/airlines.json' // update this once deployed
 
 class AirlineSearch extends Component {
-  contructor() {
+  constructor() {
     super();
-    this.state = { flightdata: [] };
-    this.fetchFlights = this.fetchFlights.bind(this);
-  }
+    this.state = {
+      flightdata: []
+    };
 
-  const fetchFlights = () => {
-    axios.get(SERVER_URL).then((results) => {
-      // console.log(results.data);
-      this.setState({flightdata: results.data});
-      setTimeout(fetchFlights, 6000); // recursion - calls itself after 6 seconds
-    });
-  }
+    const fetchFlights = () => {
+      axios.get(SERVER_URL).then((results) => {
+        // console.log(results.data);
+        this.setState({flightdata: results.data});
+        setTimeout(fetchFlights, 6000); // recursion - calls itself after 6 seconds
+      });
+    };
 
-  fetchFlights();
+    fetchFlights();
+
+    this.saveFlight = this.saveFlight.bind(this);
+  }
 
   saveFlight(content) {
     axios.post(SERVER_URL, {content: content}).then((result) => {
       // console.log( result.data ); // the server responds with the new secret object.
-      this.setState({flightdata: [...this.state.flightdata, result.data]}) // adds the new secret to the collection of secrets in our state.
+      this.setState({flightdata: [...this.state.flightdata, result.data]}); // adds the new secret to the collection of secrets in our state.
     });
   }
 
@@ -32,7 +35,7 @@ class AirlineSearch extends Component {
       <div>
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
-        <Gallery secrets={ this.state.secrets } />
+        <Gallery flightdata={ this.state.flightdata } />
       </div>
     );
   }
@@ -49,7 +52,7 @@ class SecretForm extends Component {
 
   _handleChange(event) {
     // console.log( event.target.value );
-    this.setState({content: event.target.value})
+    this.setState({content: event.target.value});
   }
 
   _handleSubmit(event) {
@@ -70,14 +73,13 @@ class SecretForm extends Component {
 }
 
 const Gallery = (props) => {
-  console.log( props.secrets ); // we should see secret objects in the console
+  console.log( props.flightdata ); // we should see secret objects in the console
   return (
     <div>
-      { props.secrets.map( (s) => <p key={s.id}>{s.content}</p>)}
+      { props.flightdata.map( (s) => <p key={s.id}>{s.content}</p>)}
     </div>
-  )
-}
+  );
+};
 
-}
 
 export default AirlineSearch
