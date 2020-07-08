@@ -36,9 +36,21 @@ class AirlineSearch extends Component {
     this.saveFlight = this.saveFlight.bind(this);
     this.getOrigins = this.getOrigins.bind(this);
     this.getDestinations = this.getDestinations.bind(this);
+    this.galleryShow = this.galleryShow.bind(this);
+    this.userShow = this.userShow.bind(this);
 
     this.getOrigins();
     this.getDestinations();
+  }
+
+  galleryShow() {
+    this.setState({ galleryShow: true });
+    this.setState({ userShow: false });
+  }
+
+  userShow() {
+    this.setState({ userShow: true });
+    this.setState({ galleryShow: false });
   }
 
   getOrigins() {
@@ -74,7 +86,7 @@ class AirlineSearch extends Component {
   render() {
     return (
       <div>
-        <NavbarApp galleryShow={this.state.galleryShow} userShow={this.state.userShow} />
+        <NavbarApp galleryShow={this.galleryShow} userShow={this.userShow} />
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={this.saveFlight} />
         {this.state.galleryShow ? <Gallery flightdata={this.state.flightdata} origins={this.state.origins} destinations={this.state.destinations} /> : ''}
