@@ -51,7 +51,7 @@ class AirlineSearch extends Component {
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
         {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata }/> : ''}
-        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''{/* THIS PREVENTS THE USERPAGE FROM SHOWING UNLESS SELECTED */}} 
+        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''} 
       </div>
     );
   }
