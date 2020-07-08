@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import NavbarApp from './NavbarApp.jsx';
+import UserPage from './UserPage.jsx';
 
 const SERVER_URL = 'http://boring-airline.herokuapp.com/flights.json' // update this once deployed
 
@@ -9,7 +10,11 @@ class AirlineSearch extends Component {
     super();
     this.state = {
       flightdata: [],
-      galleryShow: true
+      currentUser: '',  // TO UPDATE AFTER USER SIGN IN
+      galleryShow: true,
+      userShow: true, // DEFAULT FALSE, WILL BE ACCESSIBLE AFTER THE USER HAS SIGNED IN - THIS IS LINKED with TURNERY TO THE USER PAGE
+      origins: [],
+      destinations: []
     };
 
     const fetchFlights = () => {
@@ -23,6 +28,10 @@ class AirlineSearch extends Component {
     fetchFlights();
 
     this.saveFlight = this.saveFlight.bind(this);
+  }
+
+  getOrigins (array) {
+    
   }
 
   saveFlight(content) {
@@ -42,6 +51,7 @@ class AirlineSearch extends Component {
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
         {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata }/> : ''}
+        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''{/* THIS PREVENTS THE USERPAGE FROM SHOWING UNLESS SELECTED */}} 
       </div>
     );
   }
