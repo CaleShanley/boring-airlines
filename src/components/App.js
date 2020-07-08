@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import AirlineSearch from './AirlineSearch.jsx';
+import React from 'react';
+import AirlineSearch from './AirlineSearch';
 
-
-function App () {
-
+function App() {
   return (
     <div className="App">
       <AirlineSearch />
     </div>
-  )
+  );
 }
 
 export default App;
