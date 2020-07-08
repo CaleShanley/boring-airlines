@@ -4,17 +4,21 @@ import NavbarApp from './NavbarApp.jsx';
 import UserPage from './UserPage.jsx';
 
 const SERVER_URL = 'http://boring-airline.herokuapp.com/flights.json' // update this once deployed
+const SERVER_URL1 = 'http://boring-airline.herokuapp.com/airplanes.json' // update this once deployed
 
 class AirlineSearch extends Component {
   constructor() {
     super();
     this.state = {
       flightdata: [],
+      airplanedata: [],
       currentUser: '',  // TO UPDATE AFTER USER SIGN IN
       galleryShow: true,
+      airplaneShow: true,
       userShow: true, // DEFAULT FALSE, WILL BE ACCESSIBLE AFTER THE USER HAS SIGNED IN - THIS IS LINKED with TURNERY TO THE USER PAGE
       origins: [],
-      destinations: []
+      destinations: [],
+      seats: []
     };
 
     const fetchFlights = () => {
@@ -28,14 +32,24 @@ class AirlineSearch extends Component {
       });
     };
 
+    const fetchAirplanes = () => {
+      axios.get(SERVER_URL1).then((planes) => {
+        // console.log('axios results', planes.data);
+        this.setState({ airplanedata: planes.data });
+        setTimeout(fetchAirplanes, 6000); // recursion - calls itself after 6 seconds
+      }).then(() => {
+        this.getAirplanes();
+      });
+    };
+
     fetchFlights();
+    fetchAirplanes();
 
     this.saveFlight = this.saveFlight.bind(this);
     this.getOrigins = this.getOrigins.bind(this);
     this.getDestinations = this.getDestinations.bind(this);
+    this.getAirplanes = this.getAirplanes.bind(this);
 
-    this.getOrigins();
-    this.getDestinations();
   }
 
   getOrigins () {
@@ -58,6 +72,11 @@ class AirlineSearch extends Component {
     this.setState({destinations: list});
   }
 
+  getAirplanes () {
+    console.log(this.state.airplanedata)
+    this.setState({seats: this.state.airplanedata});
+  }
+
   saveFlight(content) {
     axios.post(SERVER_URL, { content: content }).then((result) => {
       // console.log( result.data ); // the server responds with the new secret object.
@@ -75,7 +94,8 @@ class AirlineSearch extends Component {
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
         {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations}/> : ''}
-        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''} 
+        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''}
+        {this.state.airplaneShow? <Airplane seats={ this.state.seats }/> : ''}
       </div>
     );
   }
@@ -136,6 +156,20 @@ const Gallery = (props) => {
 
   );
 };
+
+
+const Airplane = (props) => {
+  console.log('some bshdaskifaksjdhflk', props.seats);
+
+  return (
+    <div class="airplane">
+      {props.seats.map((seat) =>
+        <p>{seat.id}</p>
+      )}
+    </div>
+
+  );
+}
 
 
 export default AirlineSearch
