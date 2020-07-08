@@ -28,10 +28,31 @@ class AirlineSearch extends Component {
     fetchFlights();
 
     this.saveFlight = this.saveFlight.bind(this);
+    this.getOrigins = this.getOrigins.bind(this);
+    this.getDestinations = this.getDestinations.bind(this);
+
+    this.getOrigins();
+    this.getDestinations();
   }
 
-  getOrigins (array) {
-    
+  getOrigins () {
+    let list = [];
+    this.state.flightdata.map((flight) => {
+      list.push(flight.fromto.slice(0,3));
+    });
+    let unique = [...new Set(list)];
+    list = Array.from(unique);
+    this.setState({origins: list});
+  }
+
+  getDestinations () {
+    let list = [];
+    this.state.flightdata.map((flight) => {
+      list.push(flight.fromto.slice(7,10));
+    });
+    let unique = [...new Set(list)];
+    list = Array.from(unique);
+    this.setState({destinations: list});
   }
 
   saveFlight(content) {
@@ -50,7 +71,7 @@ class AirlineSearch extends Component {
         <NavbarApp />
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
-        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata }/> : ''}
+        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations}/> : ''}
         {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''} 
       </div>
     );
