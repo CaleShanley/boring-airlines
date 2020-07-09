@@ -177,12 +177,14 @@ class Gallery extends Component {
     return (
     <div class="dropdown">
       <Form onSubmit={ this._handleSearch }>
+        Choose Departure Airport:
         <select id="origin" name="origin" onChange={ this._handleOrigin }>
           {this.props.origins.map((flight) =>
             <option value={flight}>{flight}</option>
           )}
         </select>
-      >>
+      <br/>
+      Choose Arrival Airport:
       <select name="dest" id="dest" onChange={ this._handleDestination }>
           {this.props.destinations.map((flight) =>
             <option value={flight}>{flight}</option>
