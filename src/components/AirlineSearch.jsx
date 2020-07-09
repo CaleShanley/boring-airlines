@@ -54,7 +54,12 @@ class AirlineSearch extends Component {
     this.getAirplanes = this.getAirplanes.bind(this);
     this.galleryShow = this.galleryShow.bind(this);
     this.userShow = this.userShow.bind(this);
+    this.findPlane = this.findPlane.bind(this);
 
+  }
+
+  findPlane() {
+    this.setState({airplaneShow: true});
   }
 
   galleryShow() {
