@@ -171,6 +171,7 @@ class Gallery extends Component {
     this._handleDestination = this._handleDestination.bind(this);
     this._handleSearch = this._handleSearch.bind(this);
     this.resultsVisible = this.resultsVisible.bind(this);
+    this.renderAirplane = this.renderAirplane.bind(this);
   }
 
   _handleSearch(event) {
