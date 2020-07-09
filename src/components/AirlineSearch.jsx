@@ -119,13 +119,13 @@ class AirlineSearch extends Component {
         <Container>
         <NavbarApp galleryShow={this.galleryShow} userShow={this.userShow} />
           <Row>
-            <Col lg="3"></Col>
-            <Col lg="6 ">
+            <Col lg="1"></Col>
+            <Col lg="10">
             {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations} findPlane={ this.findPlane }/> : ''}
             {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''}
             {this.state.airplaneShow? <Airplane seats={ this.state.seats } airplaneId={ this.state.airplaneId }/> : ''}
             </Col>
-            <Col lg="3"></Col>
+            <Col lg="1"></Col>
           </Row>
         </Container>
       </div>
@@ -244,10 +244,10 @@ const Airplane = (props) => {
     return(
       colarr.map((i) =>  {
         return(
-        <Col>{i}</Col>
+        <Col><Button variant="secondary">{i}</Button></Col>
+        )}
         )
-      })
-    )
+      )
   }
 
   return (
@@ -257,7 +257,19 @@ const Airplane = (props) => {
         <p>{"Airplane "}{seat.name}{" Rows "}{seat.rows}{" Columns "}{seat.columns}</p>
       )}
 
+      <Row>
       {seatMap(plane[0].rows, plane[0].columns)}
+      </Row>
+      <Row>
+      {seatMap(plane[0].rows, plane[0].columns)}
+      </Row>
+      <Row>
+      {seatMap(plane[0].rows, plane[0].columns)}
+      </Row>
+      <Row>
+      {seatMap(plane[0].rows, plane[0].columns)}
+      </Row>
+
 
     </div>
 
