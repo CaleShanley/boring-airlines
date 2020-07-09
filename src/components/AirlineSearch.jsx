@@ -240,17 +240,13 @@ const Airplane = (props) => {
     for (let i = 0; i < columns; i++) {
       colarr.push(i);
     }
-    
+
     return(
       colarr.map((i) =>  {
-        rowarr.map((j) => {
         return(
         <Col>{i}</Col>
         )
-        })
       })
-              
-           
     )
   }
 
