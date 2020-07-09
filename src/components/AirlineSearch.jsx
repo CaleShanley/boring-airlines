@@ -214,25 +214,33 @@ class Gallery extends Component {
 const Airplane = (props) => {
   console.log('some bshdaskifaksjdhflk', props.seats);
 
+  let plane = props.seats.filter((plane) => plane.id == props.airplaneId)
+  console.log('this is the plane you selected', plane)
+
+  const seatMap = (rows, columns) => {
+    console.log(rows, columns)
+    const seats = []
+    seats.push(<p></p>)
+    return(
+      for (let i=0; i<rows; i++){
+          return(
+             {for (let j=0; j<columns; j++) {
+                return(<div display="inline-block">{j}<div>)
+              }}
+             <br/>
+          )
+      }
+    )
+  }
+
   return (
     <div class="airplane">
       <h3>Seat Select</h3>
-      {props.seats.map((seat) =>
+      {plane.map((seat) =>
         <p>{"Airplane "}{seat.name}{" Rows "}{seat.rows}{" Columns "}{seat.columns}</p>
       )}
 
-      <h2></h2>
-      <table className="grid">
-        <tbody>
-          {props.seats[0] ? props.seats.map(() =>
-            <tr>
-              { props.seats.map( (seat) =>
-                <td
-                  key={seat.name} onClick = {e => this.onClickSeat(seat)}>{seat.columns} </td>) }
-            </tr>
-          ) : ''}
-        </tbody>
-      </table>
+      {seatMap(plane[0].rows, plane[0].columns)}
 
     </div>
 
