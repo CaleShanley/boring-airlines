@@ -21,7 +21,7 @@ class AirlineSearch extends Component {
       currentUser: '',  // TO UPDATE AFTER USER SIGN IN
       galleryShow: true,
       airplaneShow: false,
-      userShow: true, // DEFAULT FALSE, WILL BE ACCESSIBLE AFTER THE USER HAS SIGNED IN - THIS IS LINKED with TURNERY TO THE USER PAGE
+      userShow: false, // DEFAULT FALSE, WILL BE ACCESSIBLE AFTER THE USER HAS SIGNED IN - THIS IS LINKED with TURNERY TO THE USER PAGE
       origins: [],
       destinations: [],
       seats: [],
@@ -231,18 +231,26 @@ const Airplane = (props) => {
   console.log('this is the plane you selected', plane)
 
   const seatMap = (rows, columns) => {
-    console.log(rows, columns)
-    const seats = []
-    seats.push(<p></p>)
+    console.log(rows, columns);
+    let rowarr = []
+    for (let i = 0; i < rows; i++) {
+      rowarr.push(i);
+    }
+    let colarr = []
+    for (let i = 0; i < columns; i++) {
+      colarr.push(i);
+    }
+    
     return(
-      for (let i=0; i<rows; i++){
-          return(
-             {for (let j=0; j<columns; j++) {
-                return(<div display="inline-block">{j}<div>)
-              }}
-             <br/>
-          )
-      }
+      colarr.map((i) =>  {
+        rowarr.map((j) => {
+        return(
+        <Col>{i}</Col>
+        )
+        })
+      })
+              
+           
     )
   }
 
