@@ -17,7 +17,7 @@ class AirlineSearch extends Component {
       airplanedata: [],
       currentUser: '',  // TO UPDATE AFTER USER SIGN IN
       galleryShow: true,
-      airplaneShow: true,
+      airplaneShow: false,
       userShow: true, // DEFAULT FALSE, WILL BE ACCESSIBLE AFTER THE USER HAS SIGNED IN - THIS IS LINKED with TURNERY TO THE USER PAGE
       origins: [],
       destinations: [],
