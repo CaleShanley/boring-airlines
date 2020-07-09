@@ -21,7 +21,8 @@ class AirlineSearch extends Component {
       userShow: true, // DEFAULT FALSE, WILL BE ACCESSIBLE AFTER THE USER HAS SIGNED IN - THIS IS LINKED with TURNERY TO THE USER PAGE
       origins: [],
       destinations: [],
-      seats: []
+      seats: [],
+      airplaneId: ''
     };
 
     const fetchFlights = () => {
@@ -58,8 +59,9 @@ class AirlineSearch extends Component {
 
   }
 
-  findPlane() {
+  findPlane(aId) {
     this.setState({airplaneShow: true});
+    this.setState({airplaneId: aId});
   }
 
   galleryShow() {
@@ -70,6 +72,7 @@ class AirlineSearch extends Component {
   userShow() {
     this.setState({ userShow: true });
     this.setState({ galleryShow: false });
+    this.setState({ airplaneShow: false });
   }
 
   getOrigins() {
@@ -113,9 +116,9 @@ class AirlineSearch extends Component {
         <NavbarApp galleryShow={this.galleryShow} userShow={this.userShow} />
         <h2>Secrets coming soon</h2>
         <SecretForm onSubmit={ this.saveFlight } />
-        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations}/> : ''}
+        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations} findPlane={ this.findPlane }/> : ''}
         {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''}
-        {this.state.airplaneShow? <Airplane seats={ this.state.seats }/> : ''}
+        {this.state.airplaneShow? <Airplane seats={ this.state.seats } airplaneId={ this.state.airplaneId }/> : ''}
       </div>
     );
   }
@@ -155,20 +158,66 @@ class SecretForm extends Component {
 
 
 
-const Gallery = (props) => {
+class Gallery extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      o: '',
+      d: '',
+      showResults: false
+    }
+    this._handleOrigin = this._handleOrigin.bind(this);
+    this._handleDestination = this._handleDestination.bind(this);
+    this._handleSearch = this._handleSearch.bind(this);
+    this.resultsVisible = this.resultsVisible.bind(this);
+  }
+
+  _handleSearch(event) {
+    event.preventDefault();
+    this.setState({showResults: true})
+  }
+
+  resultsVisible() {
+    return(
+      this.props.flightdata.map((flight) => {
+        if ( this.state.o === flight.fromto.slice(0, 3) && this.state.d === flight.fromto.slice(7, 10) ) {
+          return(
+            <Button value={flight.airplane_id} variant="primary" type="submit" onClick={ this.renderAirplane }>
+              Date: {flight.date} || Flight Number: {flight.flightnumber} || Flight Path: {flight.fromto} || Seats: {flight.seats}
+            </Button>
+          );
+        }
+      })
+    )
+  }
+
+  renderAirplane(event) {
+    event.preventDefault();
+    this.props.findPlane(event.target.value)
+  }
+
+  _handleOrigin(event) {
+    this.setState({ o: event.target.value })
+  }
+
+  _handleDestination(event) {
+    this.setState({ d: event.target.value })
+  }
 
 
-  return (
+  render() {
+    return (
     <div class="dropdown">
-      <Form>
-        <select id="origin" name="origin">
-          {props.origins.map((flight) =>
+      <Form onSubmit={ this._handleSearch }>
+        <select id="origin" name="origin" onChange={ this._handleOrigin }>
+          {this.props.origins.map((flight) =>
             <option value={flight}>{flight}</option>
           )}
         </select>
       >>
-      <select name="dest" id="dest">
-          {props.destinations.map((flight) =>
+      <select name="dest" id="dest" onChange={ this._handleDestination }>
+          {this.props.destinations.map((flight) =>
             <option value={flight}>{flight}</option>
           )}
         </select>
@@ -178,9 +227,20 @@ const Gallery = (props) => {
       </Button>
 
       </Form>
+      <br/>
+      <br/>
+      <br/>
+
+      {this.state.showResults? this.resultsVisible() : ''}
+
+      <br/>
+      <br/>
+      <br/>
+
     </div >
 
-  );
+    )
+  };
 };
 
 
