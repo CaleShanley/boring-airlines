@@ -4,6 +4,9 @@ import NavbarApp from './NavbarApp.jsx';
 import UserPage from './UserPage.jsx';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 
 const SERVER_URL = 'http://boring-airline.herokuapp.com/flights.json' // update this once deployed
@@ -113,10 +116,18 @@ class AirlineSearch extends Component {
   render() {
     return (
       <div>
+        <Container>
         <NavbarApp galleryShow={this.galleryShow} userShow={this.userShow} />
-        {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations} findPlane={ this.findPlane }/> : ''}
-        {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''}
-        {this.state.airplaneShow? <Airplane seats={ this.state.seats } airplaneId={ this.state.airplaneId }/> : ''}
+          <Row>
+            <Col lg="3"></Col>
+            <Col lg="6 ">
+            {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations} findPlane={ this.findPlane }/> : ''}
+            {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''}
+            {this.state.airplaneShow? <Airplane seats={ this.state.seats } airplaneId={ this.state.airplaneId }/> : ''}
+            </Col>
+            <Col lg="3"></Col>
+          </Row>
+        </Container>
       </div>
     );
   }
