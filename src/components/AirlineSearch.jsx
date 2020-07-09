@@ -197,11 +197,13 @@ const Airplane = (props) => {
       <h2></h2>
       <table className="grid">
         <tbody>
+          {props.seats[0] ? props.seats.map(() =>
             <tr>
               { props.seats.map( (seat) =>
                 <td
-                  key={seat.name} onClick = {e => this.onClickSeat(seat)}>{seat.rows} </td>) }
+                  key={seat.name} onClick = {e => this.onClickSeat(seat)}>{seat.columns} </td>) }
             </tr>
+          ) : ''}
         </tbody>
       </table>
 
