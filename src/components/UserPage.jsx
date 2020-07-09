@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 class UserPage extends Component {
-    constructor () {
+    constructor() {
         super();
         this.state = {
 
@@ -10,7 +10,7 @@ class UserPage extends Component {
     render() {
         return (
             <div>
-                
+                <h1>Coming Soon!</h1>
             </div>
         )
     }
