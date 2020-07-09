@@ -126,38 +126,6 @@ class AirlineSearch extends Component {
 
 
 
-class SecretForm extends Component {
-  constructor() {
-    super();
-    this.state = { content: '' };
-    this._handleChange = this._handleChange.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
-  }
-
-  _handleChange(event) {
-    // console.log( event.target.value );
-    this.setState({ content: event.target.value });
-  }
-
-  _handleSubmit(event) {
-    event.preventDefault();
-    // call a function for our parent class.
-    this.props.onSubmit(this.state.content); // sends back to parent class
-    this.setState({ content: '' })// once parent is called, set state back to an empty string so user doesn't have to manually delete the text area
-  }
-
-  render() {
-    return (
-      <form onSubmit={this._handleSubmit}>
-        <textarea value={this.state.content} onChange={this._handleChange} />
-        <input type="submit" value="Tell" />
-      </form>
-    );
-  }
-}
-
-
-
 class Gallery extends Component {
 
   constructor() {
