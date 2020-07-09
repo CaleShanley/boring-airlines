@@ -114,8 +114,6 @@ class AirlineSearch extends Component {
     return (
       <div>
         <NavbarApp galleryShow={this.galleryShow} userShow={this.userShow} />
-        <h2>Secrets coming soon</h2>
-        <SecretForm onSubmit={ this.saveFlight } />
         {this.state.galleryShow ? <Gallery flightdata={ this.state.flightdata } origins={this.state.origins} destinations={this.state.destinations} findPlane={ this.findPlane }/> : ''}
         {this.state.userShow? <UserPage currentUser={ this.state.currentUser }/> : ''}
         {this.state.airplaneShow? <Airplane seats={ this.state.seats } airplaneId={ this.state.airplaneId }/> : ''}
